@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         ViewModelProviders
             .of(this)
             .get(ItemListViewModel::class.java)
-            .navigateToDetails
+            .getNavigateToDetails()
             .observe(this, Observer<Event<String>> {
-                it.getContentIfNotHandled()?.let { id ->
+                it.getContentIfUnhandled()?.let { id ->
                     binding.content.itemDetailContainer?.id?.let { detailContainerId ->
                         supportFragmentManager
                             .beginTransaction()

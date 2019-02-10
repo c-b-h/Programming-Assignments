@@ -5,13 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ItemListViewModel : ViewModel() {
-    private val _navigateToDetails = MutableLiveData<Event<String>>()
-
-    val navigateToDetails: LiveData<Event<String>>
-        get() = _navigateToDetails
-
+    private val navigateToDetails = MutableLiveData<Event<String>>()
 
     fun userClicksOnButton(itemId: String) {
-        _navigateToDetails.value = Event(itemId)
+        navigateToDetails.value = Event(itemId)
     }
+
+    fun getNavigateToDetails(): LiveData<Event<String>> = navigateToDetails
 }
