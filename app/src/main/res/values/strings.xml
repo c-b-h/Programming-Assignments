@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Peakon</string>
+
+    <string name="search_hint">"Type name or e-mail"</string>
+
+    <string name="employee_details_name_title">Name</string>
+    <string name="employee_details_email_title">E-mail</string>
+    <string name="employee_details_birthday_title">Birthday</string>
+</resources>

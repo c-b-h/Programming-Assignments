@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="employee"
+            type="se.ingenuity.peakon.model.Employee" />
+
+        <variable
+            name="account"
+            type="se.ingenuity.peakon.model.Account" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/base_margin_2x">
+
+            <ImageView
+                android:id="@+id/image"
+                imageUrl="@{`https://thispersondoesnotexist.com`}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1.3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base_margin_2x"
+                android:layout_marginTop="@dimen/base_margin_2x"
+                android:text="@string/employee_details_name_title"
+                app:layout_constraintBottom_toTopOf="@+id/name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{employee.attributes.name}"
+                android:textAppearance="?textAppearanceSearchResultTitle"
+                app:layout_constraintBottom_toTopOf="@+id/email_title"
+                app:layout_constraintStart_toStartOf="@+id/name_title"
+                app:layout_constraintTop_toBottomOf="@+id/name_title"
+                tools:text="Cyrus" />
+
+            <TextView
+                android:id="@+id/email_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base_margin_2x"
+                android:text="@string/employee_details_email_title"
+                app:layout_constraintBottom_toTopOf="@+id/email"
+                app:layout_constraintStart_toStartOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{account.attributes.email}"
+                android:textAppearance="?textAppearanceSearchResultTitle"
+                app:layout_constraintStart_toStartOf="@+id/email_title"
+                app:layout_constraintTop_toBottomOf="@+id/email_title"
+                tools:text="cyrus.bh@gmail.com" />
+
+            <TextView
+                android:id="@+id/birth_day_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base_margin_2x"
+                android:text="@string/employee_details_birthday_title"
+                android:visibility="@{!TextUtils.isEmpty(employee.attributes.birth) ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="@id/email"
+                app:layout_constraintTop_toBottomOf="@id/email" />
+
+            <TextView
+                android:id="@+id/birth_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{employee.attributes.birth}"
+                android:textAppearance="?textAppearanceSearchResultTitle"
+                android:visibility="@{!TextUtils.isEmpty(employee.attributes.birth) ? View.VISIBLE : View.GONE}"
+                app:layout_constraintStart_toStartOf="@+id/birth_day_title"
+                app:layout_constraintTop_toBottomOf="@+id/birth_day_title"
+                tools:text="1980-09-23" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
