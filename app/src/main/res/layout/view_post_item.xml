@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="post"
+            type="se.ingenuity.tattoodo.model.Post" />
+
+        <variable
+            name="status"
+            type="se.ingenuity.tattoodo.vo.Status" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:elevation="@dimen/base_margin"
+        android:paddingTop="@dimen/base_margin_3x"
+        android:paddingBottom="@dimen/base_margin_3x">
+
+        <ImageView
+            android:id="@+id/uploader_image"
+            imageUrl="@{post.uploader.image_url}"
+            android:layout_width="@dimen/post_uploader_avatar_size"
+            android:layout_height="@dimen/post_uploader_avatar_size"
+            android:layout_marginStart="@dimen/base_margin_3x"
+            android:layout_marginBottom="@dimen/base_margin_3x"
+            android:transitionName="@{`uploader_image` + post.id}"
+            app:layout_constraintBottom_toTopOf="@id/image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="#f0f" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_3x"
+            android:text="@{post.uploader.name}"
+            android:transitionName="@{`name` + post.id}"
+            app:layout_constraintBottom_toBottomOf="@id/uploader_image"
+            app:layout_constraintStart_toEndOf="@id/uploader_image"
+            app:layout_constraintTop_toTopOf="@id/uploader_image"
+            tools:text="Cyrus Bakhtiari-Haftlang" />
+
+        <ImageView
+            android:id="@+id/image"
+            imageUrl="@{post.image.url}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:transitionName="@{`image` + post.id}"
+            app:layout_constraintBottom_toTopOf="@id/like_button"
+            app:layout_constraintDimensionRatio="1.33"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uploader_image" />
+
+        <ImageButton
+            android:id="@+id/like_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin_3x"
+            android:layout_marginTop="@dimen/base_margin_3x"
+            android:src="@drawable/ic_plus_one_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/comment_button"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
+
+        <ImageButton
+            android:id="@+id/comment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:src="@drawable/ic_message_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/share_button"
+            app:layout_constraintStart_toEndOf="@+id/like_button" />
+
+        <ImageButton
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_margin"
+            android:src="@drawable/ic_share_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/comment_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
