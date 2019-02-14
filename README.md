@@ -12,3 +12,24 @@ The Data Binding Library allows the data sources in the app to bind to UI compon
 With the use of Dagger2 and its specialized Android Dagger library the consumer components of utility dependencies to become agnostic to where the dependencies originate further separating the concerns between components. The pattern also allows for seamless swapping of one implementation with another in for instance testing environments.
 
 In order for Dagger2 to correctly build a dependency tree, all dependencies need to be "touched". The `AppModule` includes an `ActivitiesModule` defines a `SubComponent` for each `Activity` in the project. Each of these `SubComponent`s in turn define their own dependents such as `Fragment`s that also want to be included in the tree. This approach allows for future modularization of the codebase into separate feature modules.
+
+## Tablet support
+The assignment is delivered with an out-of-the-box tablet support where the layout includes the detail screen next to the list of items. On handsets `MainActivity` only attaches `ListFragment` and `DetailActivity` is started upon clicking on a particular post while on tablets `MainActivity` instead replaces the right-side container with `DetailFragment`.
+
+Classic `Fragment`->`Activity` calls are implemented using an callback-interface whom the encapsulating `Activity` may implement. In this assigment a simple `ViewModel` is used to whom item clicks in `ListFragment` are propagated. When otaining the `NavigationViewModel` `ListFragment` states that it wants to obtain the instance **of** *any* encapsulating `Activity` by passing its `Activity` into `of()`. `MainActivity` could then observe the same `ViewModel`-instance by passing `this` into `of()`.
+
+In `MainActivity`
+```
+ViewModelProviders
+    .of(this)
+    .get(NavigationViewModel::class.java)
+```
+
+In `ListFragment`
+```
+ViewModelProviders
+    .of(requireActivity())
+    .get(NavigationViewModel::class.java)
+```
+
+Note that in order to be fully agnostic, `ListFragment` should have included a check for `if (getParent() == null)` as it could have been encapsulated by another `Fragment` rather than its `Activity`.
