@@ -33,3 +33,9 @@ ViewModelProviders
 ```
 
 Note that in order to be fully agnostic, `ListFragment` should have included a check for `if (getParent() == null)` as it could have been encapsulated by another `Fragment` rather than its `Activity`.
+
+## Shared Element Transition
+On handsets the user will notice a transition effect when moving from `MainActivity` to the `DetailFragment` of `DetailActivity` (i.e. from one `Activity` to another `Activity`'s `Fragment` which is by far the trickiest transition move to pull of) where the uploader's name, avatar and image are transitioned on to the new screen. A great effort is made to both make sure that the transition is smooth but also that the postponing and resuming of the transition is done in the same component (`DetailActivity`) to again respect the seperation of concerns.
+
+The way this is done is the reverse of the listener-pattern mentioned in Tablet support section. The `DetailActivity` who must postpone the enter transition until the relevant `View`-components are ready (i.e. the image has been loaded or failed to load), observe the same call as its `DetailFragment` using it inside `of()`. Unless the status of the `LiveData` is `LOADING` it registers a `onPreDrawListener` who then resumes the postponed enter transition.
+
