@@ -39,3 +39,4 @@ On handsets the user will notice a transition effect when moving from `MainActiv
 
 The way this is done is the reverse of the listener-pattern mentioned in Tablet support section. The `DetailActivity` who must postpone the enter transition until the relevant `View`-components are ready (i.e. the image has been loaded or failed to load), observe the same call as its `DetailFragment` using it inside `of()`. Unless the status of the `LiveData` is `LOADING` it registers a `onPreDrawListener` who then resumes the postponed enter transition.
 
+![Shared Element Transition](activity-to-fragment-transition.gif)
