@@ -3,7 +3,7 @@ Programming assignment for Tattoodo
 
 |Handset|Tablet| 
 |---|---|
-|<img alt="Handet" src="https://github.com/c-b-h/Tattoodo/raw/master/handset.png">|<img alt="Tablet" src="https://github.com/c-b-h/Tattoodo/raw/master/tablet.png">|
+|<img alt="Handet" src="handset.png">|<img alt="Tablet" src="tablet.png">|
 
 ## Architecture
 ![MVVM](https://cdn-images-1.medium.com/max/1600/1*8KprSpqqPtSuYObjOFPt2g.png)
@@ -43,4 +43,4 @@ On handsets the user will notice a transition effect when moving from `MainActiv
 
 The way this is done is the reverse of the listener-pattern mentioned in Tablet support section. The `DetailActivity` who must postpone the enter transition until the relevant `View`-components are ready (i.e. the image has been loaded or failed to load), observe the same call as its `DetailFragment` using it inside `of()`. Unless the status of the `LiveData` is `LOADING` it registers a `onPreDrawListener` who then resumes the postponed enter transition.
 
-<img alt="Shared Element Transition" src="https://github.com/c-b-h/Tattoodo/raw/master/activity-to-fragment-transition.gif" width="50%">
+<img alt="Shared Element Transition" src="activity-to-fragment-transition.gif" width="50%">
